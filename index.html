@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ABDUS SALAM – Booking</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#e6edf5;
+}
+.app{
+  max-width:420px;
+  margin:auto;
+  background:#fff;
+  min-height:100vh;
+}
+
+/* PAGE */
+.page{display:none;padding-bottom:110px}
+.page.active{display:block}
+
+/* HEADER */
+header{padding:20px}
+h2{margin:5px 0}
+.app-name{
+  font-size:22px;
+  font-weight:bold;
+  color:#1cc6b7;
+}
+
+/* INPUT */
+input,button{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:14px;
+  margin-bottom:10px;
+  background:#f1f4f8;
+}
+button.primary{
+  background:#1cc6b7;
+  color:#fff;
+  font-weight:bold;
+}
+
+/* CARD */
+.card{
+  margin:15px;
+  border-radius:22px;
+  overflow:hidden;
+  background:#f7f9fc;
+  box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+.card img{
+  width:100%;
+  height:210px;
+  object-fit:cover;
+}
+.card-body{padding:15px}
+.stars{color:#f5b400}
+.review{font-size:13px;color:#666}
+
+/* TAG */
+.tags{padding:0 15px}
+.tag{
+  display:inline-block;
+  padding:8px 16px;
+  background:#e0f7f4;
+  border-radius:20px;
+  margin:6px 6px 0 0;
+  cursor:pointer;
+}
+.tag.active{
+  background:#1cc6b7;
+  color:#fff;
+}
+
+/* NAV */
+.bottom-nav{
+  position:fixed;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  max-width:420px;
+  width:100%;
+  background:#fff;
+  display:flex;
+  justify-content:space-around;
+  padding:10px 0;
+  border-top:1px solid #ddd;
+}
+.bottom-nav button{
+  background:none;
+  border:none;
+  font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+<!-- HOME -->
+<div id="home" class="page active">
+<header>
+<div class="app-name">ABDUS SALAM</div>
+<p>Hotel • Villa • Resort</p>
+<input placeholder="Cari hotel / villa (Bali)">
+<input type="date">
+<input type="number" value="2">
+<button class="primary" onclick="go('cari')">Cari</button>
+</header>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1566073771259-6a8506099945">
+<div class="card-body">
+<h3>Luxury Hotel Bali</h3>
+<div class="stars">★★★★★</div>
+<div class="review">⭐ 4.9 (1.245 ulasan)</div>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6">
+<div class="card-body">
+<h3>Private Villa Ubud</h3>
+<div class="stars">★★★★★</div>
+<div class="review">⭐ 4.8 (980 ulasan)</div>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85">
+<div class="card-body">
+<h3>Mountain Resort</h3>
+<div class="stars">★★★★☆</div>
+<div class="review">⭐ 4.6 (630 ulasan)</div>
+</div>
+</div>
+</div>
+
+<!-- CARI -->
+<div id="cari" class="page">
+<header>
+<h2>Hasil Pencarian</h2>
+</header>
+
+<div class="tags">
+<span class="tag active" onclick="filter('all',this)">Semua</span>
+<span class="tag" onclick="filter('hotel',this)">Hotel</span>
+<span class="tag" onclick="filter('villa',this)">Villa</span>
+<span class="tag" onclick="filter('resort',this)">Resort</span>
+</div>
+
+<div class="card" data-type="hotel" onclick="go('detail')">
+<img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb">
+<div class="card-body">
+<h3>Modern City Hotel</h3>
+<div class="stars">★★★★☆</div>
+<div class="review">⭐ 4.5 (520 ulasan)</div>
+<p>Denpasar, Bali</p>
+</div>
+</div>
+
+<div class="card" data-type="villa" onclick="go('detail')">
+<img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b">
+<div class="card-body">
+<h3>Ocean View Villa</h3>
+<div class="stars">★★★★★</div>
+<div class="review">⭐ 4.9 (1.020 ulasan)</div>
+<p>Seminyak</p>
+</div>
+</div>
+
+<div class="card" data-type="resort" onclick="go('detail')">
+<img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511">
+<div class="card-body">
+<h3>Beach Resort</h3>
+<div class="stars">★★★★☆</div>
+<div class="review">⭐ 4.7 (870 ulasan)</div>
+<p>Nusa Dua</p>
+</div>
+</div>
+</div>
+
+<!-- DETAIL -->
+<div id="detail" class="page">
+<header>
+<h2>Detail Penginapan</h2>
+<div class="stars">★★★★★</div>
+<p>Rp 2.500.000 / malam</p>
+<button class="primary" onclick="go('booking')">Booking Sekarang</button>
+</header>
+</div>
+
+<!-- BOOKING -->
+<div id="booking" class="page">
+<header>
+<h2>Form Booking</h2>
+<label>Check-in</label>
+<input type="date">
+<label>Check-out</label>
+<input type="date">
+<input type="number" value="2">
+<button class="primary" onclick="go('home')">Konfirmasi</button>
+</header>
+</div>
+
+<!-- PROFIL -->
+<div id="profil" class="page">
+<header>
+<h2>Profil</h2>
+<label>Nama</label>
+<input id="nama" value="User Aktif" disabled>
+<label>Email</label>
+<input id="email" value="user@email.com" disabled>
+<button class="primary" onclick="edit()">Edit Profil</button>
+</header>
+</div>
+
+</div>
+
+<!-- NAV -->
+<div class="bottom-nav">
+<button onclick="go('home')">Home</button>
+<button onclick="go('cari')">Cari</button>
+<button onclick="go('booking')">Booking</button>
+<button onclick="go('profil')">Profil</button>
+</div>
+
+<script>
+function go(p){
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+  document.getElementById(p).classList.add('active');
+}
+
+function filter(t,el){
+  document.querySelectorAll('.tag').forEach(x=>x.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.card').forEach(c=>{
+    c.style.display = (t==='all'||c.dataset.type===t)?'block':'none';
+  });
+}
+
+let e=false;
+function edit(){
+  e=!e;
+  nama.disabled=!e;
+  email.disabled=!e;
+}
+</script>
+
+</body>
+</html>
